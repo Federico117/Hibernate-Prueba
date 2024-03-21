@@ -1,11 +1,9 @@
 package org.example.modelo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "empleados")
@@ -18,7 +16,8 @@ public class Empleado {
     private String nombre;
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
-
+    @OneToMany(orphanRemoval = true)
+    private List<Libro> libros;
     public Empleado() {
     }
 
@@ -27,6 +26,7 @@ public class Empleado {
         this.apellidos = apellidos;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
+        libros = new ArrayList<>();
     }
 
     public Long getCodigo() {
@@ -61,6 +61,26 @@ public class Empleado {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public List<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public void addLibro(Libro libro){
+        this.libros.add(libro);
+    }
+
+    public void quitarLibro(Libro libro){
+        this.libros.remove(libro);
+    }
+
+    public void quitarLibro(int index){
+        libros.remove(index);
+    }
+
     @Override
     public String toString() {
         return "Empleado{" +
@@ -68,6 +88,7 @@ public class Empleado {
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
-                '}';
+                ", libros="+ libros +
+                "\n}";
     }
 }

@@ -9,11 +9,16 @@
         <class>org.example.modelo.Empleado</class>
 
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
-            <property name="javax.persistence.jdbc.user" value="a" />
-            <property name="javax.persistence.jdbc.password" value="a" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+            <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/Desktop/carinito;mv_store=false" />-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/informatorio" />
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="admin" />
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name = "hibernate.show_sql" value = "true" />
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />
         </properties>
     </persistence-unit>
