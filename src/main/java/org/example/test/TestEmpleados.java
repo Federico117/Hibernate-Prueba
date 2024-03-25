@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -20,24 +21,11 @@ public class TestEmpleados {
         Libro libro = new Libro(3L, "Diario de Ana Frank");
         Libro libro2 = new Libro(4L, "El caballero de la armadura oxidada");
         man.getTransaction().begin();
-        // Persistimos manualmente los libros
-        man.persist(libro);
-        man.persist(libro2);
-        empleado.addLibro(libro);
-        empleado.addLibro(libro2);
+        empleado.setLibros(Arrays.asList(libro, libro2));
         man.persist(empleado);
         man.getTransaction().commit();
         imprimirTodo();
         man.close();
-
-        man = emf.createEntityManager();
-        man.getTransaction().begin();
-        empleado = man.merge(empleado);
-        empleado.quitarLibro(1);
-        man.getTransaction().commit();
-        imprimirTodo();
-        man.close();
-        System.out.println("Este es el elemento que quedo sin referenciar: "+libro2);
     }
 
     public static void insertInicial(){

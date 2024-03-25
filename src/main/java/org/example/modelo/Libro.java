@@ -11,6 +11,10 @@ public class Libro {
     @Column(name = "titulo")
     private String titulo;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_empleado")
+    private Empleado empleado;
+
     public Libro(Long isbn, String titulo) {
         this.isbn = isbn;
         this.titulo = titulo;
@@ -32,7 +36,16 @@ public class Libro {
         return "\nLibro{" +
                 "isbn=" + isbn +
                 ", titulo='" + titulo +
+                ", empleado="+(empleado != null ? empleado.getCodigo() : "no hay empleado")+
                 '}';
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public String getTitulo() {

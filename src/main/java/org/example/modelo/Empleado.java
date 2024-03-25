@@ -16,9 +16,10 @@ public class Empleado {
     private String nombre;
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Libro> libros;
     public Empleado() {
+        libros = new ArrayList<>();
     }
 
     public Empleado(java.lang.Long codigo, String apellidos, String nombre, Date fechaNacimiento) {
